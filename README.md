@@ -9,7 +9,6 @@ Used to check a healthcheck endpoint during integration tests on another contain
 services:
   yourapp:
   build: .
-  
 
   healthcheck_test:
     image: therepo:healthecheck_test
@@ -25,3 +24,4 @@ Variables:
 * **TARGET_PORT**: `int` the port to health check [Default: `9097`]
 * **TARGET_PATH**: `string` the path to health check [Default: `/health/`]
 * **TARGET_USE_HTTPS**: `bool` use http or https [Default: `False`]
+* **TARGET_TIMEOUT**: `int` the timeout, in seconds, to wait for the health check [Default: `1`]
