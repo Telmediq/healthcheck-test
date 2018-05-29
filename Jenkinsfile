@@ -4,7 +4,7 @@ properties([
     ])
 ])
 
-def projectName = 'smartcall'
+def projectName = 'healthcheck-test'
 def buildLock = "${projectName}_${env.BRANCH_NAME}"
 
 pipeline {

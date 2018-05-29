@@ -7,8 +7,6 @@ BUILD_NUMBER ?= local-build
 GIT_COMMIT ?= local-commit
 BRANCH_NAME ?= local-branch
 
-VERSION=$(shell docker-compose run --rm smartcall version)
-
 build: export COMPOSE_FILE=docker-compose.base.yml
 build: repo-login
 build:
@@ -23,9 +21,6 @@ tag-latest:
 tag-commit:
 	docker tag $(COMPOSE_PROJECT_NAME)_$(IMAGE_NAME) $(REGISTRY_URI)/$(IMAGE_NAME):git-$(GIT_COMMIT)
 
-tag-version:
-	docker tag $(COMPOSE_PROJECT_NAME)_$(IMAGE_NAME) $(REGISTRY_URI)/$(IMAGE_NAME):$(BRANCH_NAME)-$(VERSION)
-
 
 # Publishing
 
@@ -35,10 +30,7 @@ publish-latest: tag-latest
 publish-commit: tag-commit
 	docker push $(REGISTRY_URI)/$(IMAGE_NAME):git-$(GIT_COMMIT)
 
-publish-version: tag-version
-	docker push $(REGISTRY_URI)/$(IMAGE_NAME):$(BRANCH_NAME)-$(VERSION)
-
-publish: repo-login publish-latest publish-commit publish-version
+publish: repo-login publish-latest publish-commit
 
 # generate script to login to aws docker repo
 CMD_REPOLOGIN := "eval $$\( aws ecr"
