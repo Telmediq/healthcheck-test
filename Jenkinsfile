@@ -4,7 +4,7 @@ properties([
     ])
 ])
 
-def projectName = 'healthcheck-test'
+def projectName = 'healthchecktest'
 def buildLock = "${projectName}_${env.BRANCH_NAME}"
 
 pipeline {
