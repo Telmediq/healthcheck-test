@@ -40,7 +40,7 @@ endif
 ifdef AWS_CLI_REGION
 CMD_REPOLOGIN += " --region $(AWS_CLI_REGION)"
 endif
-CMD_REPOLOGIN += " get-login --no-include-email \)"
+CMD_REPOLOGIN += " get-login \| sed \'s/-e none//\' \)"
 
 # login to AWS-ECR
 repo-login: ## Auto login to AWS-ECR unsing aws-cli
