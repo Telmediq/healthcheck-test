@@ -28,10 +28,9 @@ class HealthCheckTestCase(unittest.TestCase):
 
         try:
             response = requests.get(self.url, timeout=TIMEOUT)
+            json.dumps(response.content.decode())
+            self.assertEqual(200, response.status_code, response.content.decode())
         except (RequestException, NewConnectionError) as e:
             self.fail("Could not fetch response from url %s: %s" % (self.url, e))
-        self.assertEqual(200, response.status_code, response.status_code)
-        try:
-            json.dumps(response.content.decode())
         except ValueError:
             self.fail('Should have received a JSON response.')
